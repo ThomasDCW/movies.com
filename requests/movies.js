@@ -9,7 +9,5 @@ export const getMoviesRequest = () =>
 
 export const getMoviesWithQueryRequest = (query) =>
   axios.get(
-    `https://api.themoviedb.org/3/search/movie?api_key=${
-      import.meta.env.VITE_api_key
-    }&language=en-US&page=1&include_adult=false&query=${query}`
+    `https://api.themoviedb.org/3/search/movie?api_key=d28d9c1cd34fd553415b3fb5df968eb0&language=en-US&page=1&include_adult=false&query=${query}`
   );
