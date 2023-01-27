@@ -11,7 +11,6 @@ export default function App() {
   }, []);
 
   const movies = useSelector((state) => state.movies.allMovies);
-  const query = useSelector((state) => state.movies.query);
 
   const [search, setSearch] = useState('');
 
@@ -19,8 +18,6 @@ export default function App() {
     e.preventDefault(), dispatch(getMoviesWithQuery(search));
   };
 
-  console.log(query);
-  console.log(search);
   let moviesArray = movies.results;
 
   return (
@@ -30,7 +27,6 @@ export default function App() {
           <div className='col-start-4 col-span-6'>
             <div className='flex items-center py-4'>
               <div className='w-full'>
-                <div className='pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center'></div>
                 <label htmlFor='search' className='sr-only'>
                   Search
                 </label>
@@ -38,7 +34,7 @@ export default function App() {
                   <input
                     id='search'
                     name='search'
-                    className='block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-rose-500 focus:border-rose-500 sm:text-sm'
+                    className='block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-green-500 focus:border-green-500 sm:text-sm'
                     placeholder='Search'
                     type='search'
                     value={search}
@@ -46,9 +42,9 @@ export default function App() {
                       setSearch(e.target.value);
                     }}
                   />
-                  <button type='submit' onClick={searchMovies}>
-                    GO
-                  </button>
+                  <div className='flex justify-center'>
+                    <button type='submit' onClick={searchMovies}></button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -66,38 +62,29 @@ export default function App() {
               return (
                 <div
                   key={movie.id}
-                  className='flex flex-col rounded-lg shadow-lg overflow-hidden'
+                  className='flex flex-col rounded-lg shadow-lg overflow-hidden drop-shadow-md hover:drop-shadow-2xl'
                 >
-                  <div className='flex-shrink-0'>
+                  <div className='flex-shrink-0 '>
                     <img
                       className='h-48 w-full object-cover'
-                      src={
-                        `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
-                          ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
-                          : null
-                      }
+                      src={`https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`}
                       alt=''
                     />
                   </div>
-                  <div className='flex-1 bg-white p-6 flex flex-col justify-between'>
+                  <div className='flex-1 bg-white p-6 flex flex-col justify-between  '>
                     <div className='flex-1'>
-                      <a href='' className='block mt-2'>
-                        <p className='text-xl font-semibold text-gray-900'>
-                          {movie.original_title}
-                        </p>
-                        <p className='mt-3 text-base text-gray-500'>
-                          {movie.overview}
-                        </p>
-                      </a>
+                      <p className='text-xl font-semibold text-gray-900'>
+                        {movie.original_title}
+                      </p>
+                      <p className='mt-3 text-base text-gray-500'>
+                        {movie.overview}
+                      </p>
                     </div>
-                    <div className='mt-6 flex items-center'>
+                    <div className='mt-6 flex items-center justify-around'>
                       <div className='ml-3'>
-                        <p className='text-sm font-medium text-gray-900'>
-                          <a href='' className='hover:underline'></a>
-                        </p>
-                        <div className='flex space-x-1 text-sm text-gray-500'>
-                          <p>{movie.release_date}</p>
-                          <span aria-hidden='true'></span>
+                        <div className='flex  space-x-40 text-sm text-gray-600'>
+                          <p>{movie.release_date}</p>{' '}
+                          <p>{Math.trunc(movie.vote_average)}/10</p>
                         </div>
                       </div>
                     </div>
