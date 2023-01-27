@@ -13,10 +13,11 @@ function reducer(state = initialState, action) {
         ...state,
         allMovies: newAllMovies,
       };
-    case typesPosts.SET_MOVIES:
+    case typesPosts.SET_MOVIES_WITH_QUERY:
+      let newAllMoviesWithQuery = action.payload;
       return {
         ...state,
-        query: action.payload,
+        query: newAllMoviesWithQuery,
       };
 
     default:

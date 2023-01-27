@@ -1,7 +1,8 @@
 export const types = {
   GET_MOVIES: 'movies/GET_MOVIES',
   SET_MOVIES: 'movies/SET_MOVIES',
-  SET_QUERY: 'movies/SET_QUERY',
+  GET_MOVIES_WITH_QUERY: 'movies/GET_MOVIES_WITH_QUERY',
+  SET_MOVIES_WITH_QUERY: 'movies/SET_MOVIES_WITH_QUERY',
 };
 
 export function getMovies() {
@@ -17,9 +18,15 @@ export function setMovies(payload) {
   };
 }
 
-export function setQuery(payload) {
+export function getMoviesWithQuery() {
   return {
-    type: types.SET_QUERY,
+    type: types.GET_MOVIES_WITH_QUERY,
+  };
+}
+
+export function setMoviesWithQuery(payload) {
+  return {
+    type: types.SET_MOVIES_WITH_QUERY,
     payload,
   };
 }

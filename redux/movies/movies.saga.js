@@ -2,11 +2,11 @@ import { put, all, takeLatest, call } from 'redux-saga/effects';
 
 import { types as typesMovies } from './movies.actions';
 
-import { setMovies } from './movies.actions';
+import { setMovies, setMoviesWithQuery } from './movies.actions';
 
 import {
   getMoviesRequest,
-  getMoviesWithTagRequest,
+  getMoviesWithQueryRequest,
 } from '../../requests/movies';
 
 export function* getMoviesSaga() {
@@ -16,18 +16,14 @@ export function* getMoviesSaga() {
 }
 
 export function* getMoviesWithQuerySaga(action) {
-  if (action.payload.length > 4) {
-    const { data } = yield call(getMoviesWithTagRequest, action.payload);
+  const { data } = yield call(getMoviesWithQueryRequest);
 
-    yield put(setPosts(data));
-  }
-
-  if (action.payload.length === 0) {
-    yield getMoviesSaga();
-  }
+  yield put(setMoviesWithQuery(data, action.payload));
 }
 
 export function* MoviesSagas() {
   yield all([takeLatest(typesMovies.GET_MOVIES, getMoviesSaga)]);
-  yield all([takeLatest(typesMovies.SET_MOVIES, getMoviesWithQuerySaga)]);
+  yield all([
+    takeLatest(typesMovies.GET_MOVIES_WITH_QUERY, getMoviesWithQuerySaga),
+  ]);
 }

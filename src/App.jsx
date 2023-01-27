@@ -1,5 +1,5 @@
 import 'tailwindcss/tailwind.css';
-import { getMovies, setQuery } from '../redux/movies/movies.actions';
+import { getMovies, getMoviesWithQuery } from '../redux/movies/movies.actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -11,10 +11,9 @@ export default function App() {
   }, []);
 
   const movies = useSelector((state) => state.movies.allMovies);
-  // const query = useSelector((state) => state.movies.query);
+  const query = useSelector((state) => state.movies.query);
 
   let moviesArray = movies.results;
-  console.log(moviesArray);
 
   return (
     <>
@@ -33,9 +32,15 @@ export default function App() {
                     name='search'
                     className='block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-rose-500 focus:border-rose-500 sm:text-sm'
                     placeholder='Search'
-                    type='search'
-                    // value={query}
-                    // onChange={(e) => dispatch(setQuery(e.target.value))}
+                    type='text'
+                    value={query}
+                    onChange={(e) =>
+                      dispatch(
+                        getMoviesWithQuery({
+                          query: 'avatar',
+                        })
+                      )
+                    }
                   />
                 </div>
               </div>
