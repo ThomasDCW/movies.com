@@ -1,7 +1,7 @@
 export const types = {
-  GET_MOVIES: 'posts/GET_MOVIES',
-  SET_MOVIES: 'posts/SET_MOVIES',
-  SET_QUERY: 'posts/SET_QUERY',
+  GET_MOVIES: 'movies/GET_MOVIES',
+  SET_MOVIES: 'movies/SET_MOVIES',
+  SET_QUERY: 'movies/SET_QUERY',
 };
 
 export function getMovies() {
