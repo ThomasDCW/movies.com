@@ -11,12 +11,11 @@ export default function App() {
   }, []);
 
   const movies = useSelector((state) => state.movies.allMovies);
-  const query = useSelector((state) => state.movies.query);
+  // const query = useSelector((state) => state.movies.query);
 
-  let moviesArray = Object.keys(movies).map(function (key) {
-    return [Number(key), movies[key]];
-  });
+  let moviesArray = movies.results;
   console.log(moviesArray);
+
   return (
     <>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10'>
@@ -35,8 +34,8 @@ export default function App() {
                     className='block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-rose-500 focus:border-rose-500 sm:text-sm'
                     placeholder='Search'
                     type='search'
-                    value={query}
-                    onChange={(e) => dispatch(setQuery(e.target.value))}
+                    // value={query}
+                    // onChange={(e) => dispatch(setQuery(e.target.value))}
                   />
                 </div>
               </div>
@@ -51,68 +50,49 @@ export default function App() {
         </div>
         <div className='relative max-w-7xl mx-auto'>
           <div className='mt-5 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none'>
-            {moviesArray.map((movie) => (
-              <div
-                key={movie.title}
-                className='flex flex-col rounded-lg shadow-lg overflow-hidden'
-              >
-                <div className='flex-shrink-0'>
-                  <img
-                    className='h-48 w-full object-cover'
-                    src={
-                      movie.cover_image ||
-                      'https://camo.githubusercontent.com/583a3488209bd62b2ee7985cd8b55a27b44c79d66a2109782d280a31976851a9/68747470733a2f2f74686570726163746963616c6465762e73332e616d617a6f6e6177732e636f6d2f692f726f3335333862793362326675706273363373722e706e67'
-                    }
-                    alt=''
-                  />
-                </div>
-                <div className='flex-1 bg-white p-6 flex flex-col justify-between'>
-                  <div className='flex-1'>
-                    {/* <p className="text-sm font-medium text-indigo-600">
-                  <a href={post.category.href} className="hover:underline">
-                    {post.category.name}
-                  </a>
-                </p> */}
-                    <a href={movie.href} className='block mt-2'>
-                      <p className='text-xl font-semibold text-gray-900'>
-                        {movie.title}
-                      </p>
-                      <p className='mt-3 text-base text-gray-500'>
-                        {movie.description}
-                      </p>
-                    </a>
+            {moviesArray.map((movie) => {
+              return (
+                <div
+                  key=''
+                  className='flex flex-col rounded-lg shadow-lg overflow-hidden'
+                >
+                  <div className='flex-shrink-0'>
+                    <img className='h-48 w-full object-cover' src='' alt='' />
                   </div>
-                  <div className='mt-6 flex items-center'>
-                    <div className='flex-shrink-0'>
-                      <a href={movie.user.website_url}>
-                        <span className='sr-only'>{movie.user.name}</span>
-                        <img
-                          className='h-10 w-10 rounded-full'
-                          src={movie.user.profile_image}
-                          alt=''
-                        />
+                  <div className='flex-1 bg-white p-6 flex flex-col justify-between'>
+                    <div className='flex-1'>
+                      <a href='' className='block mt-2'>
+                        <p className='text-xl font-semibold text-gray-900'>
+                          {movie.original_title}
+                        </p>
+                        <p className='mt-3 text-base text-gray-500'></p>
                       </a>
                     </div>
-                    <div className='ml-3'>
-                      <p className='text-sm font-medium text-gray-900'>
-                        <a
-                          href={movie.user.website_url}
-                          className='hover:underline'
-                        >
-                          {movie.user.name}
+                    <div className='mt-6 flex items-center'>
+                      <div className='flex-shrink-0'>
+                        <a href=''>
+                          <span className='sr-only'></span>
+                          <img
+                            className='h-10 w-10 rounded-full'
+                            src=''
+                            alt=''
+                          />
                         </a>
-                      </p>
-                      <div className='flex space-x-1 text-sm text-gray-500'>
-                        <time dateTime={movie.published_at}>
-                          {movie.readable_publish_date}
-                        </time>
-                        <span aria-hidden='true'>&middot;</span>
+                      </div>
+                      <div className='ml-3'>
+                        <p className='text-sm font-medium text-gray-900'>
+                          <a href='' className='hover:underline'></a>
+                        </p>
+                        <div className='flex space-x-1 text-sm text-gray-500'>
+                          <time dateTime=''>''</time>
+                          <span aria-hidden='true'>ok</span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
