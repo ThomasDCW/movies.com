@@ -1,9 +1,6 @@
 import { put, all, takeLatest, call } from 'redux-saga/effects';
-
 import { types as typesMovies } from './movies.actions';
-
 import { setMovies, setMoviesWithQuery } from './movies.actions';
-
 import {
   getMoviesRequest,
   getMoviesWithQueryRequest,
@@ -16,9 +13,9 @@ export function* getMoviesSaga() {
 }
 
 export function* getMoviesWithQuerySaga(action) {
-  const { data } = yield call(getMoviesWithQueryRequest);
+  const { data } = yield call(getMoviesWithQueryRequest, action.payload);
 
-  yield put(setMoviesWithQuery(data, action.payload));
+  yield put(setMoviesWithQuery(data));
 }
 
 export function* MoviesSagas() {

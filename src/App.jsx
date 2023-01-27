@@ -1,7 +1,7 @@
 import 'tailwindcss/tailwind.css';
 import { getMovies, getMoviesWithQuery } from '../redux/movies/movies.actions';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function App() {
   const dispatch = useDispatch();
@@ -13,6 +13,14 @@ export default function App() {
   const movies = useSelector((state) => state.movies.allMovies);
   const query = useSelector((state) => state.movies.query);
 
+  const [search, setSearch] = useState('');
+
+  const searchMovies = (e) => {
+    e.preventDefault(), dispatch(getMoviesWithQuery('matrix'));
+  };
+
+  console.log(query);
+  console.log(search);
   let moviesArray = movies.results;
 
   return (
@@ -22,27 +30,26 @@ export default function App() {
           <div className='col-start-4 col-span-6'>
             <div className='flex items-center py-4'>
               <div className='w-full'>
+                <div className='pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center'></div>
                 <label htmlFor='search' className='sr-only'>
                   Search
                 </label>
-                <div className='relative'>
-                  <div className='pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center'></div>
+                <form>
                   <input
                     id='search'
                     name='search'
                     className='block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-rose-500 focus:border-rose-500 sm:text-sm'
                     placeholder='Search'
-                    type='text'
-                    value={query}
-                    onChange={(e) =>
-                      dispatch(
-                        getMoviesWithQuery({
-                          query: 'avatar',
-                        })
-                      )
-                    }
+                    type='search'
+                    value={search}
+                    onChange={(e) => {
+                      setSearch(e.target.value);
+                    }}
                   />
-                </div>
+                  <button type='submit' onClick={searchMovies}>
+                    GO
+                  </button>
+                </form>
               </div>
             </div>
           </div>

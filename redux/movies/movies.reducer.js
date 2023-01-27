@@ -1,4 +1,4 @@
-import { types as typesPosts } from './movies.actions';
+import { types as typesMovies } from './movies.actions';
 
 const initialState = {
   allMovies: [],
@@ -7,17 +7,15 @@ const initialState = {
 
 function reducer(state = initialState, action) {
   switch (action.type) {
-    case typesPosts.SET_MOVIES:
-      let newAllMovies = action.payload;
+    case typesMovies.SET_MOVIES:
       return {
         ...state,
-        allMovies: newAllMovies,
+        allMovies: action.payload,
       };
-    case typesPosts.SET_MOVIES_WITH_QUERY:
-      let newAllMoviesWithQuery = action.payload;
+    case typesMovies.SET_MOVIES_WITH_QUERY:
       return {
-        ...state,
-        query: newAllMoviesWithQuery,
+        allMovies: action.payload,
+        query: action.payload,
       };
 
     default:
