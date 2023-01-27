@@ -16,7 +16,7 @@ export default function App() {
   const [search, setSearch] = useState('');
 
   const searchMovies = (e) => {
-    e.preventDefault(), dispatch(getMoviesWithQuery('matrix'));
+    e.preventDefault(), dispatch(getMoviesWithQuery(search));
   };
 
   console.log(query);
