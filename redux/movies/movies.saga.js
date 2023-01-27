@@ -13,9 +13,14 @@ export function* getMoviesSaga() {
 }
 
 export function* getMoviesWithQuerySaga(action) {
-  const { data } = yield call(getMoviesWithQueryRequest, action.payload);
+  if (action.payload.length > 0) {
+    const { data } = yield call(getMoviesWithQueryRequest, action.payload);
+    yield put(setMoviesWithQuery(data));
+  }
 
-  yield put(setMoviesWithQuery(data));
+  if (action.payload.length === 0) {
+    yield getMoviesSaga();
+  }
 }
 
 export function* MoviesSagas() {
