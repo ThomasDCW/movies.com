@@ -50,14 +50,22 @@ export default function App() {
         </div>
         <div className='relative max-w-7xl mx-auto'>
           <div className='mt-5 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none'>
-            {moviesArray.map((movie) => {
+            {moviesArray?.map((movie) => {
               return (
                 <div
-                  key=''
+                  key={movie.id}
                   className='flex flex-col rounded-lg shadow-lg overflow-hidden'
                 >
                   <div className='flex-shrink-0'>
-                    <img className='h-48 w-full object-cover' src='' alt='' />
+                    <img
+                      className='h-48 w-full object-cover'
+                      src={
+                        `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
+                          ? `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`
+                          : null
+                      }
+                      alt=''
+                    />
                   </div>
                   <div className='flex-1 bg-white p-6 flex flex-col justify-between'>
                     <div className='flex-1'>
@@ -65,27 +73,19 @@ export default function App() {
                         <p className='text-xl font-semibold text-gray-900'>
                           {movie.original_title}
                         </p>
-                        <p className='mt-3 text-base text-gray-500'></p>
+                        <p className='mt-3 text-base text-gray-500'>
+                          {movie.overview}
+                        </p>
                       </a>
                     </div>
                     <div className='mt-6 flex items-center'>
-                      <div className='flex-shrink-0'>
-                        <a href=''>
-                          <span className='sr-only'></span>
-                          <img
-                            className='h-10 w-10 rounded-full'
-                            src=''
-                            alt=''
-                          />
-                        </a>
-                      </div>
                       <div className='ml-3'>
                         <p className='text-sm font-medium text-gray-900'>
                           <a href='' className='hover:underline'></a>
                         </p>
                         <div className='flex space-x-1 text-sm text-gray-500'>
-                          <time dateTime=''>''</time>
-                          <span aria-hidden='true'>ok</span>
+                          <p>{movie.release_date}</p>
+                          <span aria-hidden='true'></span>
                         </div>
                       </div>
                     </div>
